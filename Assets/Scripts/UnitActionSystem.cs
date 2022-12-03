@@ -8,7 +8,7 @@ public class UnitActionSystem : MonoBehaviour
     public static UnitActionSystem Instance { get; private set; }
     public event EventHandler OnSelectedUnitChanged;
 
-    [SerializeField]private Unit selectedUnit;
+    [SerializeField] private Unit selectedUnit;
     [SerializeField] private LayerMask unitPlaneLayerMask;
 
     private void Awake() {
@@ -24,7 +24,7 @@ public class UnitActionSystem : MonoBehaviour
     private void Update() {
         if (Input.GetMouseButtonDown(0)) {
             if (TryHandleUnitSelection()) return;
-            
+
             selectedUnit.Move(MouseWorld.GetPosition());
         }
     }
