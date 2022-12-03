@@ -1,12 +1,13 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class UnitActionSystem : MonoBehaviour
 {
-    [SerializeField]
-    private Unit selectedUnit;
+    public event EventHandler OnSelectedUnitChanged;
 
+    [SerializeField]private Unit selectedUnit;
     [SerializeField] private LayerMask unitPlaneLayerMask;
 
     private void Update() {
@@ -21,11 +22,20 @@ public class UnitActionSystem : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         if (Physics.Raycast(ray, out RaycastHit raycastHit, float.MaxValue, unitPlaneLayerMask)) {
             if (raycastHit.transform.TryGetComponent<Unit>(out Unit unit)) {
-                selectedUnit = unit;
+                SetSelectedUnit(unit);
                 return true;
             }
         }
 
         return false;
+    }
+
+    private void SetSelectedUnit(Unit unit) {
+        selectedUnit = unit;
+        OnSelectedUnitChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public Unit GetSelectedUnit() {
+        return selectedUnit;
     }
 }
