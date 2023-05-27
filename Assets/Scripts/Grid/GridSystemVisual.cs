@@ -1,12 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GridSystemVisual : MonoBehaviour
 {
     [SerializeField] private Transform gridSystemVisualSinglePrefab;
 
     private GridSystemVisualSingle[,] gridSystemVisualSingleArray;
+
+    public enum GridVisualType {
+        White, 
+        Blue,
+        Red,
+        Yellow
+    }
 
     private void Start() {
         gridSystemVisualSingleArray = new GridSystemVisualSingle[
@@ -22,9 +30,10 @@ public class GridSystemVisual : MonoBehaviour
                 gridSystemVisualSingleArray[x, z] = gridSystemVisualSingleTransform.GetComponent<GridSystemVisualSingle>();
             }
         }
-    }
 
-    private void Update() {
+        UnitActionSystem.Instance.OnSelectedActionChanged += UnitActionSystem_OnSelectedActionChanged;
+        LevelGrid.Instance.OnAnyUnitMovedGridPosition += LevelGrid_OnAnyUnitMovedGridPosition;
+
         UpdateGridVisual();
     }
 
@@ -48,5 +57,13 @@ public class GridSystemVisual : MonoBehaviour
         BaseAction selectedUnit = UnitActionSystem.Instance.GetSelectedAction();
 
         ShowGridPositionList(selectedUnit.GetValidActionGridPositionList());
+    }
+    
+    private void UnitActionSystem_OnSelectedActionChanged(object sender, EventArgs e) {
+        UpdateGridVisual();
+    }
+
+    private void LevelGrid_OnAnyUnitMovedGridPosition(object sender, EventArgs e) {
+        UpdateGridVisual();
     }
 }
