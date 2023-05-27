@@ -29,6 +29,9 @@ public class ShootAction : BaseAction
             return;
         }
 
+        Debug.Log("stateTimer->");
+        Debug.Log(stateTimer);
+
         stateTimer -= Time.deltaTime;
 
         switch(state) {
@@ -61,6 +64,9 @@ public class ShootAction : BaseAction
     }
 
     private void NextState() {
+        Debug.Log("NextState");
+        Debug.Log(state);
+
         switch(state) {
             case State.Aiming: 
                 state = State.Shooting;
