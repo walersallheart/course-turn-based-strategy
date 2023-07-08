@@ -1715,6 +1715,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   gridSystemVisualSinglePrefab: {fileID: 5033013110833163562, guid: 647e3ee03c43445c4b304693a33cd044,
     type: 3}
+  gridVisualTypeMaterialList:
+  - gridVisualType: 0
+    material: {fileID: 2100000, guid: 2a2acf6b8fc714778a140c515d538b81, type: 2}
+  - gridVisualType: 1
+    material: {fileID: 2100000, guid: 6d1e86fa7132c4149b948c031f3c856e, type: 2}
+  - gridVisualType: 2
+    material: {fileID: 2100000, guid: f1d3795291c1e4350be4fd3f0d8b6ba4, type: 2}
+  - gridVisualType: 3
+    material: {fileID: 2100000, guid: 3810f4ec0b43141ee84e10c60798e652, type: 2}
+  - gridVisualType: 4
+    material: {fileID: 2100000, guid: 0f7f5bc4f9ff44011a8217dfcec289a5, type: 2}
 --- !u!4 &934394267
 Transform:
   m_ObjectHideFlags: 0
