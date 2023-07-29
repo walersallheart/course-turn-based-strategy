@@ -29,19 +29,11 @@ public class ShootAction : BaseAction
             return;
         }
 
-        Debug.Log(state);
-
-        // Debug.Log("stateTimer->");
-        // Debug.Log(stateTimer);
-
         stateTimer -= Time.deltaTime;
 
-        // Debug.Log("targetUnit");
-        // Debug.Log(targetUnit);
-
-        // if (targetUnit == null) {
-        //     state = State.Cooloff;
-        // }
+        if (targetUnit == null) {
+            state = State.Cooloff;
+        }
 
         switch(state) {
             case State.Aiming: 
@@ -73,9 +65,6 @@ public class ShootAction : BaseAction
     }
 
     private void NextState() {
-        Debug.Log("NextState");
-        Debug.Log(state);
-
         switch(state) {
             case State.Aiming: 
                 state = State.Shooting;
@@ -167,8 +156,6 @@ public class ShootAction : BaseAction
     public override EnemyAIAction GetEnemyAIAction(GridPosition gridPosition)
     {
         Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(gridPosition);
-
-
 
         return new EnemyAIAction{
             gridPosition = gridPosition,
