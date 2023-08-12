@@ -36,7 +36,7 @@ public class PathNode
         this.gCost = gCost;
     }
 
-    public void SetHCost(int gCost) {
+    public void SetHCost(int hCost) {
         this.hCost = hCost;
     }
 

@@ -38,7 +38,6 @@ public class Pathfinding : MonoBehaviour
 
         PathNode endNode = gridSystem.GetGridObject(endGridPosition);
 
-
         for (int x = 0; x < gridSystem.GetWidth(); x++)
         {
             for (int z = 0; z < gridSystem.GetHeight(); z++)
