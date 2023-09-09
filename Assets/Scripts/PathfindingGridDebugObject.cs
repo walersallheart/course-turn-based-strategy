@@ -8,6 +8,7 @@ public class PathfindingGridDebugObject : GridDebugObject
     [SerializeField] private TextMeshPro gCostText;
     [SerializeField] private TextMeshPro hCostText;
     [SerializeField] private TextMeshPro fCostText;
+    [SerializeField] private SpriteRenderer isWalkableSprieEditor;
 
     private PathNode pathNode;
 
@@ -23,5 +24,6 @@ public class PathfindingGridDebugObject : GridDebugObject
         gCostText.text = pathNode.GetGCost().ToString();
         hCostText.text = pathNode.GetHCost().ToString();
         fCostText.text = pathNode.GetFCost().ToString();
+        isWalkableSprieEditor.color = pathNode.IsWalkable() ? Color.green : Color.red;
     }
 }
