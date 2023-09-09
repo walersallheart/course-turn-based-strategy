@@ -12,6 +12,8 @@ public class ShootAction : BaseAction
         public Unit shootingUnit;
     }
 
+    [SerializeField] LayerMask obstaclesLayerMask;
+
     private enum State {
         Aiming,
         Shooting,
@@ -130,6 +132,20 @@ public class ShootAction : BaseAction
                 Unit targetUnit = LevelGrid.Instance.GetUnitAtGridPosition(testGridPosition);
 
                 if (targetUnit.IsEnemy() == unit.IsEnemy()) {
+                    continue;
+                }
+
+                float unitShoulderHeight = 1.7f;
+                Vector3 unitWorldPosition = LevelGrid.Instance.GetWorldPosition(unitGridPosition);
+                Vector3 shootDir = (targetUnit.GetWorldPosition() - unitWorldPosition).normalized;
+
+                if (Physics.Raycast(
+                    unitWorldPosition + Vector3.up * unitShoulderHeight, 
+                    shootDir,
+                    Vector3.Distance(unitWorldPosition, targetUnit.GetWorldPosition()),
+                    obstaclesLayerMask
+                )) {
+                    // line of sight is blocked by an obstacle like a wall
                     continue;
                 }
 
