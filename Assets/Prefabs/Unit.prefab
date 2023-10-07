@@ -522,6 +522,7 @@ GameObject:
   - component: {fileID: 8108418038407209353}
   - component: {fileID: 8108418038407209358}
   - component: {fileID: 8484590408866654953}
+  - component: {fileID: -1489419560108755750}
   - component: {fileID: 8396561924685365665}
   - component: {fileID: 6283309862931907817}
   - component: {fileID: 6733920065974244725}
@@ -579,6 +580,20 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.454, y: 1.616, z: 0.4395}
   m_Center: {x: -0.03, y: 0.86, z: -0.01}
+--- !u!114 &-1489419560108755750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8108418038407209352}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dd7e64ce9c52b44d3bf6b157ff2e90a6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grenadeProjectilePrefab: {fileID: 7287740005311097902, guid: 20f5ec1d669274358ae9e4a1a18af6c5,
+    type: 3}
 --- !u!114 &8396561924685365665
 MonoBehaviour:
   m_ObjectHideFlags: 0
