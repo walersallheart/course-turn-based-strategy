@@ -5,16 +5,31 @@ using System;
 
 public class GrenadeProjectile : MonoBehaviour
 {
+    public static event EventHandler OnAnyGrenadeExploded;
+    [SerializeField] private Transform grenadeExplodeVfsPrefab;
+    [SerializeField] private TrailRenderer trailRenderer;
+    [SerializeField] private AnimationCurve archYAnimationCurve;
+
     private Vector3 targetPosition;
     private Action onGrenadeBehaviorComplete;
+    private float totalDistance;
+    private Vector3 positionXZ;
 
     private void Update() {
-        Vector3 moveDir = (targetPosition - transform.position).normalized;
+        Vector3 moveDir = (targetPosition - positionXZ).normalized;
 
         float moveSpeed = 15f;
-        transform.position += moveDir * moveSpeed * Time.deltaTime;
+        positionXZ += moveDir * moveSpeed * Time.deltaTime;
 
-        float reachedTargetDistance = .2f;
+        float distance = Vector3.Distance(positionXZ, targetPosition);
+        float distanceNormalized = 1 - (distance / totalDistance);
+
+        float maxHeight = totalDistance / 4f;
+
+        float positionY = archYAnimationCurve.Evaluate(distanceNormalized) * maxHeight;
+        transform.position = new Vector3(positionXZ.x, positionY, positionXZ.z);
+
+        float reachedTargetDistance = .3f;
 
         if (Vector3.Distance(transform.position, targetPosition) < reachedTargetDistance) {
             float damageRadius = 4f;
@@ -28,6 +43,9 @@ public class GrenadeProjectile : MonoBehaviour
                 }
             }
 
+            OnAnyGrenadeExploded?.Invoke(this, EventArgs.Empty);
+            trailRenderer.transform.parent = null;
+            Instantiate(grenadeExplodeVfsPrefab, targetPosition + Vector3.up * 1f, Quaternion.identity);
             Destroy(gameObject);
             onGrenadeBehaviorComplete();
         }
@@ -36,5 +54,9 @@ public class GrenadeProjectile : MonoBehaviour
     public void Setup(GridPosition targetGridPosition, Action onGrenadeBehaviorComplete) {
         targetPosition = LevelGrid.Instance.GetWorldPosition(targetGridPosition);
         this.onGrenadeBehaviorComplete = onGrenadeBehaviorComplete;
+        
+        positionXZ = transform.position;
+        positionXZ.y = 0;
+        totalDistance = Vector3.Distance(transform.position, targetPosition);
     }
 }
