@@ -8,7 +8,7 @@ public class GridObject
     private GridPosition gridPosition;
     private List<Unit> unitList;
 
-    private Door door;
+    private IInteractable interactable;
 
     public GridObject(GridSystem<GridObject> gridSystem, GridPosition gridPosition) {
         this.gridSystem = gridSystem;
@@ -50,11 +50,11 @@ public class GridObject
         return null;
     }
 
-    public Door GetDoor() {
-        return door;
+    public IInteractable GetInteractable() {
+        return interactable;
     }
 
-    public void SetDoor(Door door) {
-        this.door = door;
+    public void SetInteractable(IInteractable interactable) {
+        this.interactable = interactable;
     }
 }
